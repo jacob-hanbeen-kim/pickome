@@ -1,17 +1,20 @@
 import 'package:flutter/material.dart';
+import 'package:my_house/widgets/constants/DefaultStyleValues.dart';
 
 class InputField extends StatelessWidget {
 
   InputField({
     @required this.controller,
     this.hintText,
+    this.prefixIcon,
     this.inputType = TextInputType.text,
-    this.fontSize = 20.0,
+    this.fontSize = DefaultStyleValues.defaultFontSize,
     this.isPassword = false
   });
 
   final TextEditingController controller;
   final TextInputType inputType;
+  final Icon prefixIcon;
   final String hintText;
   final double fontSize;
   final bool isPassword;
@@ -28,9 +31,10 @@ class InputField extends StatelessWidget {
       style: customTextStyle,
       decoration: InputDecoration(
           labelText: hintText,
-          contentPadding: EdgeInsets.fromLTRB(20.0, 15.0, 20.0, 15.0),
+          prefixIcon: prefixIcon,
+          contentPadding: DefaultStyleValues.Padding,
           border: OutlineInputBorder(
-              borderRadius: BorderRadius.circular(30.0)
+              borderRadius: BorderRadius.circular(DefaultStyleValues.CircularBorderRadius)
           )
       ),
     );
