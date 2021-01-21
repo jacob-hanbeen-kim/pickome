@@ -8,7 +8,15 @@ class CreateUserPage extends StatelessWidget {
   Widget build(BuildContext context) {
 
     return CreateAccount(onPressed: (email) {
-      Navigator.push(context, MaterialPageRoute(builder: (context) => CreatePasswordPage(email: email)));
-    }, title: 'Create Username');
+        Navigator.push(
+            context,
+            MaterialPageRoute(builder: (context) => CreatePasswordPage(email: email))
+        );
+      },
+      title: 'Create Username',
+      hintText: 'Email',
+      inputType: TextInputType.emailAddress,
+      prefixIcon: Icon(Icons.mail_outline_rounded)
+    );
   }
 }

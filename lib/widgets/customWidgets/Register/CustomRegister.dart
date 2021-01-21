@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:my_house/widgets/basicWidgets/Button/Button.dart';
 import 'package:my_house/widgets/basicWidgets/Button/TextButton.dart';
-import 'package:my_house/widgets/basicWidgets/InputField.dart';
+import 'package:my_house/widgets/basicWidgets/TextField/InputField.dart';
 
 import 'package:my_house/connection/connection.dart';
 

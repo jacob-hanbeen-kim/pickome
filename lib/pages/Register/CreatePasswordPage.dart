@@ -12,7 +12,14 @@ class CreatePasswordPage extends StatelessWidget {
   Widget build(BuildContext context) {
 
     return CreateAccount(onPressed: (password) {
-      Navigator.push(context, MaterialPageRoute(builder: (context) => RegisterPage(email: email, password: password)));
-    }, title: 'Create Password');
+        Navigator.push(
+          context,
+          MaterialPageRoute(builder: (context) => RegisterPage(email: email, password: password))
+        );
+      },
+      title: 'Create Password',
+      hintText: 'Password',
+      isPassword: true,
+    );
   }
 }

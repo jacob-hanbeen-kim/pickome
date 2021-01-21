@@ -4,8 +4,9 @@ import 'package:my_house/connection/connection.dart';
 
 import 'package:my_house/widgets/basicWidgets/Button/Button.dart';
 import 'package:my_house/widgets/basicWidgets/Button/TextButton.dart';
-import 'package:my_house/widgets/basicWidgets/InputField.dart';
+import 'package:my_house/widgets/basicWidgets/TextField/InputField.dart';
 import 'package:my_house/widgets/basicWidgets/DividerWithText.dart';
+import 'package:my_house/widgets/basicWidgets/TextField/PasswordField.dart';
 
 import 'package:my_house/widgets/constants/ThemeColor.dart';
 
@@ -56,11 +57,8 @@ class _CustomLoginState extends State<CustomLogin> {
       hintText: 'Email',
       prefixIcon: Icon(Icons.mail_outline_rounded),
     );
-    final passwordField = InputField(
+    final passwordField = PasswordField(
       controller: pwController,
-      isPassword: true,
-      hintText: 'Password',
-      prefixIcon: Icon(Icons.lock_open_rounded),
     );
     final logInButton = Button(
         onPressed: () async {

@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:my_house/widgets/basicWidgets/Button/Button.dart';
-import 'package:my_house/widgets/basicWidgets/InputField.dart';
+import 'package:my_house/widgets/basicWidgets/TextField/InputField.dart';
+import 'package:my_house/widgets/basicWidgets/TextField/PasswordField.dart';
 
 class CreateAccount extends StatefulWidget {
 
@@ -8,8 +9,10 @@ class CreateAccount extends StatefulWidget {
     @required this.onPressed,
     @required this.title,
     this.hintText,
-    this.messages,
     this.inputType,
+    this.prefixIcon,
+    this.isPassword = false,
+    this.messages = '',
   });
 
   final Function onPressed;
@@ -17,6 +20,8 @@ class CreateAccount extends StatefulWidget {
   final String hintText;
   final String messages;
   final TextInputType inputType;
+  final bool isPassword;
+  final Icon prefixIcon;
 
   @override
   _CreateAccountState createState() => _CreateAccountState();
@@ -29,12 +34,21 @@ class _CreateAccountState extends State<CreateAccount> {
 
     TextEditingController inputController = TextEditingController();
 
-    final inputField = InputField(
-      controller: inputController,
-      inputType: widget.inputType,
-      hintText: widget.hintText,
-      // prefixIcon: Icon(Icons.mail_outline_rounded),
-    );
+    dynamic inputField;
+
+    if (widget.isPassword) {
+      inputField = PasswordField(
+          controller: inputController
+      );
+    } else {
+      inputField = InputField(
+        controller: inputController,
+        inputType: widget.inputType,
+        hintText: widget.hintText,
+        prefixIcon: widget.prefixIcon,
+        // prefixIcon: Icon(Icons.mail_outline_rounded),
+      );
+    }
 
     final nextButton = Button(
       onPressed: () => widget.onPressed(inputController.text),
@@ -57,6 +71,7 @@ class _CreateAccountState extends State<CreateAccount> {
         body: Padding(
           padding: const EdgeInsets.all(36.0),
           child: Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
             children: [
               inputField,
               SizedBox(height: 15.0),
