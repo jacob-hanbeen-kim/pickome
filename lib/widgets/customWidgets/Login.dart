@@ -109,13 +109,14 @@ class _CustomLoginState extends State<CustomLogin> {
               mainAxisAlignment: MainAxisAlignment.center,
               children: <Widget>[
                 SizedBox(
-                  height: 155.0,
+                  height: 100.0,
                   child: Text(
-                    'Pickome',
+                    'pickome',
                     style: TextStyle(
-                      fontSize: 50.0,
+                      fontSize: 55.0,
+                      fontFamily: 'PoiretOne',
                       fontWeight: FontWeight.bold,
-                      fontStyle: FontStyle.italic
+                      color: ThemeColor.BurnSienna
                     ),
                   )
                   // child: Image.asset(
@@ -123,7 +124,7 @@ class _CustomLoginState extends State<CustomLogin> {
                   //   fit: BoxFit.contain,
                   // ),
                 ),
-                SizedBox(height: 45.0),
+                SizedBox(height: 40.0),
                 emailField,
                 SizedBox(height: 15.0),
                 passwordField,
