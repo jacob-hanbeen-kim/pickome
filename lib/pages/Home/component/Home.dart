@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:my_house/widgets/basicWidgets/Button/TextButton.dart';
+import 'package:pickome/widgets/basicWidgets/Button/TextButton.dart';
 
 class Home extends StatefulWidget {
 
@@ -18,6 +18,7 @@ class _HomeState extends State<Home> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      backgroundColor: Colors.white,
         appBar: AppBar(
           title: Row(
             children: [
@@ -57,7 +58,7 @@ class _HomeState extends State<Home> {
                     children: [
                       CircleAvatar(
                         radius: 40.0,
-                        backgroundImage: AssetImage('assets/profileImg.jpg'),
+                        backgroundImage: AssetImage('assets/images/profileImg.jpg'),
                       ),
                       Spacer(),
                       Column(
@@ -103,14 +104,14 @@ class _HomeState extends State<Home> {
                 ],
               ),
             ),
-            Divider(
-              indent: 20.0,
-              endIndent: 20.0,
-            ),
-            Icon(
-              Icons.home,
-              size: 150.0,
-            ),
+            // Divider(
+            //   indent: 20.0,
+            //   endIndent: 20.0,
+            // ),
+            // Icon(
+            //   Icons.home,
+            //   size: 150.0,
+            // ),
             Divider(),
             Row(
               mainAxisSize: MainAxisSize.max,
@@ -140,7 +141,7 @@ class _HomeState extends State<Home> {
                               child: AspectRatio(
                                 aspectRatio: 1.0,
                                 child: Image(
-                                  image: AssetImage('assets/profileImg.jpg'),
+                                  image: AssetImage('assets/images/profileImg.jpg'),
                                   fit: BoxFit.cover,
                                 ),
                               )
@@ -150,7 +151,7 @@ class _HomeState extends State<Home> {
                               child: AspectRatio(
                                 aspectRatio: 1.0,
                                 child: Image(
-                                  image: AssetImage('assets/profileImg.jpg'),
+                                  image: AssetImage('assets/images/profileImg.jpg'),
                                   fit: BoxFit.cover,
                                 ),
                               )
@@ -160,7 +161,7 @@ class _HomeState extends State<Home> {
                               child: AspectRatio(
                                 aspectRatio: 1.0,
                                 child: Image(
-                                  image: AssetImage('assets/profileImg.jpg'),
+                                  image: AssetImage('assets/images/profileImg.jpg'),
                                   fit: BoxFit.cover,
                                 ),
                               )
@@ -178,7 +179,7 @@ class _HomeState extends State<Home> {
                               child: AspectRatio(
                                 aspectRatio: 1.0,
                                 child: Image(
-                                  image: AssetImage('assets/profileImg.jpg'),
+                                  image: AssetImage('assets/images/profileImg.jpg'),
                                   fit: BoxFit.cover,
                                 ),
                               )
@@ -188,7 +189,7 @@ class _HomeState extends State<Home> {
                               child: AspectRatio(
                                 aspectRatio: 1.0,
                                 child: Image(
-                                  image: AssetImage('assets/profileImg.jpg'),
+                                  image: AssetImage('assets/images/profileImg.jpg'),
                                   fit: BoxFit.cover,
                                 ),
                               )
@@ -198,7 +199,7 @@ class _HomeState extends State<Home> {
                               child: AspectRatio(
                                 aspectRatio: 1.0,
                                 child: Image(
-                                  image: AssetImage('assets/profileImg.jpg'),
+                                  image: AssetImage('assets/images/profileImg.jpg'),
                                   fit: BoxFit.cover,
                                 ),
                               )
@@ -216,7 +217,7 @@ class _HomeState extends State<Home> {
                               child: AspectRatio(
                                 aspectRatio: 1.0,
                                 child: Image(
-                                  image: AssetImage('assets/profileImg.jpg'),
+                                  image: AssetImage('assets/images/profileImg.jpg'),
                                   fit: BoxFit.cover,
                                 ),
                               )
@@ -226,7 +227,7 @@ class _HomeState extends State<Home> {
                               child: AspectRatio(
                                 aspectRatio: 1.0,
                                 child: Image(
-                                  image: AssetImage('assets/profileImg.jpg'),
+                                  image: AssetImage('assets/images/profileImg.jpg'),
                                   fit: BoxFit.cover,
                                 ),
                               )
@@ -236,7 +237,7 @@ class _HomeState extends State<Home> {
                               child: AspectRatio(
                                 aspectRatio: 1.0,
                                 child: Image(
-                                  image: AssetImage('assets/profileImg.jpg'),
+                                  image: AssetImage('assets/images/profileImg.jpg'),
                                   fit: BoxFit.cover,
                                 ),
                               )
@@ -254,7 +255,7 @@ class _HomeState extends State<Home> {
                               child: AspectRatio(
                                 aspectRatio: 1.0,
                                 child: Image(
-                                  image: AssetImage('assets/profileImg.jpg'),
+                                  image: AssetImage('assets/images/profileImg.jpg'),
                                   fit: BoxFit.cover,
                                 ),
                               )
@@ -264,7 +265,7 @@ class _HomeState extends State<Home> {
                               child: AspectRatio(
                                 aspectRatio: 1.0,
                                 child: Image(
-                                  image: AssetImage('assets/profileImg.jpg'),
+                                  image: AssetImage('assets/images/profileImg.jpg'),
                                   fit: BoxFit.cover,
                                 ),
                               )
@@ -274,7 +275,7 @@ class _HomeState extends State<Home> {
                               child: AspectRatio(
                                 aspectRatio: 1.0,
                                 child: Image(
-                                  image: AssetImage('assets/profileImg.jpg'),
+                                  image: AssetImage('assets/images/profileImg.jpg'),
                                   fit: BoxFit.cover,
                                 ),
                               )
@@ -288,6 +289,7 @@ class _HomeState extends State<Home> {
           ],
         ),
       bottomNavigationBar: BottomNavigationBar(
+        backgroundColor: Colors.white,
         currentIndex: currentTab,
         onTap: (int index) {
           setState(() => currentTab = index);

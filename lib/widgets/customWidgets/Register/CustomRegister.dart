@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
-import 'package:my_house/widgets/basicWidgets/Button/Button.dart';
-import 'package:my_house/widgets/basicWidgets/Button/TextButton.dart';
-import 'package:my_house/widgets/basicWidgets/TextField/InputField.dart';
+import 'package:pickome/widgets/basicWidgets/Button/Button.dart';
+import 'package:pickome/widgets/basicWidgets/Button/TextButton.dart';
+import 'package:pickome/widgets/basicWidgets/TextField/InputField.dart';
 
-import 'package:my_house/connection/connection.dart';
+import 'package:pickome/services/connection.dart';
 
 class CustomRegister extends StatefulWidget {
 

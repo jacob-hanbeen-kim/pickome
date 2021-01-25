@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:my_house/widgets/constants/DefaultStyleValues.dart';
+import 'package:pickome/widgets/constants/DefaultStyleValues.dart';
 
 class PasswordField extends StatefulWidget {
 
@@ -32,6 +32,8 @@ class _PasswordFieldState extends State<PasswordField> {
       obscureText: !widget.showPassword,
       style: customTextStyle,
       decoration: InputDecoration(
+          filled: true,
+          fillColor: Colors.white,
           labelText: widget.hintText,
           contentPadding: DefaultStyleValues.Padding,
           border: OutlineInputBorder(

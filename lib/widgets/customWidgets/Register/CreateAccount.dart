@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:my_house/widgets/basicWidgets/Button/Button.dart';
-import 'package:my_house/widgets/basicWidgets/TextField/InputField.dart';
-import 'package:my_house/widgets/basicWidgets/TextField/PasswordField.dart';
+import 'package:pickome/widgets/basicWidgets/Button/Button.dart';
+import 'package:pickome/widgets/basicWidgets/TextField/InputField.dart';
+import 'package:pickome/widgets/basicWidgets/TextField/PasswordField.dart';
 
 class CreateAccount extends StatefulWidget {
 

@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:my_house/widgets/basicWidgets/Button/TextButton.dart';
-import 'package:my_house/widgets/constants/DefaultStyleValues.dart';
+import 'package:pickome/widgets/basicWidgets/Button/TextButton.dart';
+import 'package:pickome/widgets/constants/DefaultStyleValues.dart';
 
 class PopUpAlert extends StatelessWidget {
 
