@@ -1,4 +1,4 @@
-package com.only.my_house2
+package com.only.pickome
 
 import io.flutter.embedding.android.FlutterActivity
 

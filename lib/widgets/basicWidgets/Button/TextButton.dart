@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:my_house/widgets/constants/ThemeColor.dart';
-import 'package:my_house/widgets/constants/DefaultStyleValues.dart';
+import 'package:pickome/widgets/constants/ThemeColor.dart';
+import 'package:pickome/widgets/constants/DefaultStyleValues.dart';
 
 class CustomTextButton extends StatelessWidget {
 

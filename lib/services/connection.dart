@@ -18,11 +18,11 @@ postUser(email, password, firstName, lastName) async {
   print(response.body);
 }
 
-authenticateUser(email, password) async {
+authenticateUser(username, password) async {
   Response response = await post(
       'https://kve860cw2m.execute-api.us-east-2.amazonaws.com/dev/auth',
     body: jsonEncode({
-      'email': email,
+      'username': username,
       'password': password
     }),
     headers: {

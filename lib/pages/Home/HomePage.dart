@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:my_house/widgets/customWidgets/Home/Home.dart';
+import 'package:pickome/pages/Home/component/Home.dart';
 
 class HomePage extends StatelessWidget {
 

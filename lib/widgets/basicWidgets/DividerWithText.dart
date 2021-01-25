@@ -4,13 +4,15 @@ class DividerWithText extends StatelessWidget {
 
   DividerWithText({
     this.text,
+    this.dividerColor = Colors.black12,
+    this.fontColor = Colors.black45,
     this.height = 50
   });
 
   final String text;
   final double height;
-  final Color dividerColor = Colors.black12;
-  final Color fontColor = Colors.black45;
+  final Color dividerColor;
+  final Color fontColor;
 
   @override
   Widget build(BuildContext context) {
