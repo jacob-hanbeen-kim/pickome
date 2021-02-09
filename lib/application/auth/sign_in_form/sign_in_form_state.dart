@@ -7,6 +7,7 @@ abstract class SignInFormState with _$SignInFormState {
     @required Password password,
     @required bool showErrorMessages,
     @required bool isSubmitting,
+    @required bool forgotPasswordRequestSent,
     @required Option<Either<AuthFailure, Unit>> authFailureOrSuccessOption,
   }) = _SignInFormState;
 
@@ -15,6 +16,7 @@ abstract class SignInFormState with _$SignInFormState {
         password: Password(''),
         showErrorMessages: false,
         isSubmitting: false,
+        forgotPasswordRequestSent: false,
         authFailureOrSuccessOption: none(),
       );
 }

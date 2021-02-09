@@ -13,10 +13,12 @@ class SplashScreen extends StatelessWidget {
           initial: () {},
           authenticated: () {
             print('I am authenticated');
-            // ExtendedNavigator.of(context).replace(Routes.loginScreen),
+            ExtendedNavigator.of(context).replace(Routes.homeScreen);
           },
-          unuthenticated: () =>
-              ExtendedNavigator.of(context).replace(Routes.signInScreen),
+          unuthenticated: () {
+            print('I am unauthenticated');
+            ExtendedNavigator.of(context).replace(Routes.signInScreen);
+          },
         );
       },
       child: const Scaffold(

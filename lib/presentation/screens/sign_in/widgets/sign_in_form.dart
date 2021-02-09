@@ -1,6 +1,10 @@
+import 'package:auto_route/auto_route.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:pickome/application/auth/auth_bloc.dart';
 import 'package:pickome/application/auth/sign_in_form/sign_in_form_bloc.dart';
+import 'package:pickome/presentation/routes/router.gr.dart';
+import 'package:pickome/presentation/routes/sign_in_route.dart';
 import 'package:pickome/presentation/screens/sign_in/widgets/Logo.dart';
 import 'package:pickome/presentation/widgets/basicWidgets/Button/Button.dart';
 import 'package:pickome/presentation/widgets/basicWidgets/Button/text_button.dart';
@@ -14,20 +18,26 @@ class SignInForm extends StatelessWidget {
     return BlocConsumer<SignInFormBloc, SignInFormState>(
       listener: (context, state) {
         state.authFailureOrSuccessOption.fold(
-            () => {},
-            (either) => either.fold(
-                (failure) => {
-                      // display error message
-                      failure.map(
-                          cancelledByUser: (_) => 'Cancelled',
-                          serverError: (_) => 'Server Error',
-                          emailAlreadyInUse: (_) => 'Email Already In Use',
-                          invalidEmailAndPasswordCombination: (_) =>
-                              'Invalid Email and Password Combination')
-                    },
-                (_) => {
-                      // navigate to home page
-                    }));
+          () => {},
+          (either) => either.fold(
+            (failure) => {
+              // display error message
+              failure.map(
+                  cancelledByUser: (_) => 'Cancelled',
+                  serverError: (_) => 'Server Error',
+                  emailAlreadyInUse: (_) => 'Email Already In Use',
+                  invalidEmailAndPasswordCombination: (_) =>
+                      'Invalid Email and Password Combination')
+            },
+            (_) {
+              // navigate to home page
+              ExtendedNavigator.of(context).replace(Routes.homeScreen);
+              context
+                  .read<AuthBloc>()
+                  .add(const AuthEvent.authCheckRequested());
+            },
+          ),
+        );
       },
       builder: (context, state) {
         return Padding(
@@ -63,9 +73,9 @@ class SignInForm extends StatelessWidget {
                   const SizedBox(height: 15.0),
                   PasswordField(
                     onChanged: (value) => {
-                      context
-                          .read<SignInFormBloc>()
-                          .add(SignInFormEvent.passwordChanged(value)),
+                      context.read<SignInFormBloc>().add(
+                            SignInFormEvent.passwordChanged(value),
+                          ),
                     },
                     validator: (_) => context
                         .read<SignInFormBloc>()
@@ -84,7 +94,12 @@ class SignInForm extends StatelessWidget {
                     children: [
                       CustomTextButton(
                           onPressed: () {
-                            Navigator.pushNamed(context, '/forgotPassword');
+                            ExtendedNavigator.of(context).push(
+                              Routes.forgotPasswordScreen,
+                              arguments: ForgotPasswordScreenArguments(
+                                signInFormBloc: context.read<SignInFormBloc>(),
+                              ),
+                            );
                           },
                           text: 'Forgot Password?')
                     ],
@@ -111,9 +126,15 @@ class SignInForm extends StatelessWidget {
                           ),
                       CustomTextButton(
                           onPressed: () {
-                            context.read<SignInFormBloc>().add(
-                                const SignInFormEvent
-                                    .registerWithEmailAndPasswordPressed());
+                            ExtendedNavigator.of(context).push(
+                              Routes.createUserScreen,
+                              arguments: CreateUserScreenArguments(
+                                signInFormBloc: context.read<SignInFormBloc>(),
+                              ),
+                            );
+                            // context.read<SignInFormBloc>().add(
+                            //     const SignInFormEvent
+                            //         .registerWithEmailAndPasswordPressed());
                             // Navigator.pushNamed(context, '/register');
                           },
                           text: 'Sign Up'),

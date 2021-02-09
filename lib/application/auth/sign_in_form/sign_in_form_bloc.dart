@@ -58,6 +58,19 @@ class SignInFormBloc extends Bloc<SignInFormEvent, SignInFormState> {
             isSubmitting: false,
             authFailureOrSuccessOption: some(failureOrSuccess));
       },
+      forgotPasswordPressed: (e) async* {
+        final isEmailValid = state.emailAddress.isValid();
+
+        if (isEmailValid) {
+          yield state.copyWith(
+            forgotPasswordRequestSent: true,
+          );
+        }
+
+        yield state.copyWith(
+          forgotPasswordRequestSent: false,
+        );
+      },
     );
   }
 

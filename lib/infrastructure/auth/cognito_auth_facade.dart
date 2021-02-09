@@ -9,6 +9,7 @@ import 'package:pickome/domain/auth/value_objects.dart';
 import 'package:pickome/domain/core/value_objects.dart';
 import 'package:pickome/domain/model/user.dart';
 import 'package:pickome/infrastructure/auth/cognito_user_mapper.dart';
+import 'package:pickome/infrastructure/core/connection.dart';
 
 // @prod
 @LazySingleton(as: IAuthFacade)
@@ -22,6 +23,7 @@ class CognitoAuthFacade implements IAuthFacade {
   @override
   Future<Option<User>> getSignedInUser() async {
     /// fetch current user from cognito api call
+
     Future<User> response = Future<User>.value(User(
         id: UniqueId.fromUniqueString('uniqueId'), username: 'tempUsername'));
 
@@ -60,6 +62,11 @@ class CognitoAuthFacade implements IAuthFacade {
 
     try {
       /// sign in
+      final Connection con = Connection();
+      final bool result =
+          await con.authenticateUser(emailAddressStr, passwordStr);
+      print(result);
+
       return right(unit);
     } on PlatformException catch (e) {
       /// combine invalid password and email so hackers don't get hint of correct existing email

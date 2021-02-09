@@ -5,8 +5,6 @@ import 'package:pickome/injection.dart';
 import 'package:pickome/presentation/screens/sign_in/widgets/sign_in_form.dart';
 
 class SignInScreen extends StatelessWidget {
-  static const String route = '/login';
-
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -14,5 +12,7 @@ class SignInScreen extends StatelessWidget {
       create: (context) => getIt<SignInFormBloc>(),
       child: SignInForm(),
     ));
+
+    // return Scaffold(body: SignInForm());
   }
 }
