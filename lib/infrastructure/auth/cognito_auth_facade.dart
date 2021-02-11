@@ -164,6 +164,7 @@ class CognitoAuthFacade implements IAuthFacade {
 
       final passwordStr = password.getOrCrash();
 
+      print('IN Cognito');
       print(signInWith);
       print(passwordStr);
 
@@ -172,12 +173,56 @@ class CognitoAuthFacade implements IAuthFacade {
       final bool result = await con.authenticateUser(signInWith, passwordStr);
       print(result);
 
-      return right(unit);
+      if (result) {
+        return right(unit);
+      } else {
+        return left(const AuthFailure.invalidCredentials());
+      }
     } on PlatformException catch (e) {
       /// combine invalid password and email so hackers don't get hint of correct existing email
       if (e.code == "ERROR_WRONG_PASSWORD" ||
           e.code == "ERROR_USER_NOT_FOUND") {
         return left(const AuthFailure.invalidCredentials());
+      } else {
+        return left(const AuthFailure.serverError());
+      }
+    }
+  }
+
+  @override
+  Future<Either<AuthFailure, Unit>> checkIfExistingEmail(
+      {Username emailAddress}) {
+    // TODO: implement checkIfExistingEmail
+    throw UnimplementedError();
+  }
+
+  @override
+  Future<Either<AuthFailure, Unit>> checkIfExistingPhoneNumber(
+      {Username phoneNumber}) {
+    // TODO: implement checkIfExistingPhoneNumber
+    throw UnimplementedError();
+  }
+
+  @override
+  Future<Either<AuthFailure, Unit>> checkIfExistingUsername(
+      {Username username}) async {
+    final usernameStr = username.getOrCrash();
+
+    print(usernameStr);
+
+    try {
+      /// sign in
+      final Connection con = Connection();
+      // final bool result = await con.check(usernameStr);
+      final bool result = true;
+      print(result);
+
+      return right(unit);
+    } on PlatformException catch (e) {
+      /// combine invalid password and email so hackers don't get hint of correct existing email
+      if (e.code == "ERROR_WRONG_PASSWORD" ||
+          e.code == "ERROR_USER_NOT_FOUND") {
+        return left(const AuthFailure.invalidEmailAndPasswordCombination());
       } else {
         return left(const AuthFailure.serverError());
       }

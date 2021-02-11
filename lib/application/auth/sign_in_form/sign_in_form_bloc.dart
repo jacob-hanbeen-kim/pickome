@@ -112,6 +112,15 @@ class SignInFormBloc extends Bloc<SignInFormEvent, SignInFormState> {
     final isPhoneNumberValid = state.phoneNumber.isValid();
     final isPasswordValid = state.password.isValid();
 
+    print(isUsernameValid);
+    print(state.username.toString());
+    print(isEmailValid);
+    print(state.emailAddress.toString());
+    print(isPhoneNumberValid);
+    print(state.phoneNumber.toString());
+    print(isPasswordValid);
+    print(state.password.toString());
+
     /// 2. If valid, use IAuthFacade and yield Some<Right<Unit>> in the authFailureOrSuccessOption state field.
     if ((isUsernameValid || isEmailValid || isPhoneNumberValid) &&
         isPasswordValid) {

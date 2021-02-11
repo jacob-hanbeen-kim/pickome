@@ -26,14 +26,18 @@ class SignInForm extends StatelessWidget {
                   serverError: (_) => 'Server Error',
                   emailAlreadyInUse: (_) => 'Email Already In Use',
                   invalidEmailAndPasswordCombination: (_) =>
-                      'Invalid Email and Password Combination')
+                      'Invalid Email and Password Combination',
+                  invalidCredentials: (_) => 'Invalid Credentials',
+                  usernameAlreadyInUse: (_) => 'Username Already In Use')
             },
             (_) {
               // navigate to home page
-              ExtendedNavigator.of(context).replace(Routes.homeScreen);
-              context
-                  .read<AuthBloc>()
-                  .add(const AuthEvent.authCheckRequested());
+              print(state.username);
+              print(state.password);
+              // ExtendedNavigator.of(context).replace(Routes.homeScreen);
+              // context
+              //     .read<AuthBloc>()
+              //     .add(const AuthEvent.authCheckRequested());
             },
           ),
         );
@@ -52,21 +56,21 @@ class SignInForm extends StatelessWidget {
                     onChanged: (value) => {
                       context
                           .read<SignInFormBloc>()
-                          .add(SignInFormEvent.emailChanged(value)),
+                          .add(SignInFormEvent.usernameChanged(value)),
                     },
                     validator: (_) => context
                         .read<SignInFormBloc>()
                         .state
-                        .emailAddress
+                        .username
                         .value
                         .fold(
                             (f) => f.maybeMap(
-                                  invalidEmail: (_) => "Invalid Email",
+                                  invalidUsername: (_) => "Invalid Username",
                                   orElse: () => null,
                                 ),
                             (_) => null),
                     prefixIcon: const Icon(Icons.mail_outline_rounded),
-                    hintText: 'Email',
+                    hintText: 'Username, email, or phone number',
                     inputType: TextInputType.emailAddress,
                   ),
                   const SizedBox(height: 15.0),
@@ -106,8 +110,9 @@ class SignInForm extends StatelessWidget {
                   const SizedBox(height: 15.0),
                   Button(
                       onPressed: () {
-                        context.read<SignInFormBloc>().add(const SignInFormEvent
-                            .signInWithEmailAndPasswordPressed());
+                        context.read<SignInFormBloc>().add(
+                              const SignInFormEvent.signInWithPickomePressed(),
+                            );
                       },
                       text: 'Sign In'),
                   const SizedBox(height: 15.0),

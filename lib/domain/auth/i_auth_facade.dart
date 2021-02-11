@@ -28,7 +28,12 @@ abstract class IAuthFacade {
     EmailAddress emailAddress,
     PhoneNumber phoneNumber,
   });
-
+  Future<Either<AuthFailure, Unit>> checkIfExistingUsername(
+      {@required Username username});
+  Future<Either<AuthFailure, Unit>> checkIfExistingEmail(
+      {@required Username emailAddress});
+  Future<Either<AuthFailure, Unit>> checkIfExistingPhoneNumber(
+      {@required Username phoneNumber});
   Future<Either<AuthFailure, Unit>> signInWithPickome({
     Username username,
     EmailAddress emailAddress,
