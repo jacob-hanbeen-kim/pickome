@@ -22,6 +22,20 @@ abstract class IAuthFacade {
     @required EmailAddress emailAddress,
     @required Password password,
   });
+  Future<Either<AuthFailure, Unit>> registerWithPickome({
+    @required Username username,
+    @required Password password,
+    EmailAddress emailAddress,
+    PhoneNumber phoneNumber,
+  });
+
+  Future<Either<AuthFailure, Unit>> signInWithPickome({
+    Username username,
+    EmailAddress emailAddress,
+    PhoneNumber phoneNumber,
+    @required Password password,
+  });
+
   Future<Either<AuthFailure, Unit>> signInWithEmailAndPassword({
     @required EmailAddress emailAddress,
     @required Password password,

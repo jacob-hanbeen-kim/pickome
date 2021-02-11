@@ -28,12 +28,12 @@ class Confirm extends StatelessWidget {
               const Spacer(),
               const Text('Welcome to Pickome', style: textStyle),
               Text(
-                  context.read<SignInFormBloc>().state.emailAddress.value.fold(
-                      (f) => f.maybeMap(
-                            invalidEmail: (_) => "Invalid Email",
-                            orElse: () => null,
-                          ),
-                      (l) => l),
+                  context
+                      .read<SignInFormBloc>()
+                      .state
+                      .username
+                      .value
+                      .fold((_) => null, (val) => val),
                   style: textStyle),
               const SizedBox(height: 25.0),
               Button(

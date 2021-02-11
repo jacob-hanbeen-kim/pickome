@@ -37,17 +37,13 @@ class CreateUser extends StatelessWidget {
                 hintText: hintText,
                 onChanged: (value) => {
                   context.read<SignInFormBloc>().add(
-                        SignInFormEvent.emailChanged(value),
+                        SignInFormEvent.usernameChanged(value),
                       ),
                 },
-                validator: (_) => context
-                    .read<SignInFormBloc>()
-                    .state
-                    .emailAddress
-                    .value
-                    .fold(
+                validator: (_) =>
+                    context.read<SignInFormBloc>().state.username.value.fold(
                         (f) => f.maybeMap(
-                              invalidEmail: (_) => "Invalid Email",
+                              invalidUsername: (_) => "Invalid Username",
                               orElse: () => null,
                             ),
                         (_) => null),

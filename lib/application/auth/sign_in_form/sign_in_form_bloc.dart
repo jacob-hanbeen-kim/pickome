@@ -23,9 +23,21 @@ class SignInFormBloc extends Bloc<SignInFormEvent, SignInFormState> {
     SignInFormEvent event,
   ) async* {
     yield* event.map(
+      usernameChanged: (e) async* {
+        yield state.copyWith(
+          username: Username(e.usernameStr),
+          authFailureOrSuccessOption: none(),
+        );
+      },
       emailChanged: (e) async* {
         yield state.copyWith(
           emailAddress: EmailAddress(e.emailStr),
+          authFailureOrSuccessOption: none(),
+        );
+      },
+      phoneNumberChanged: (e) async* {
+        yield state.copyWith(
+          phoneNumber: PhoneNumber(e.phoneNumberStr),
           authFailureOrSuccessOption: none(),
         );
       },
@@ -71,6 +83,58 @@ class SignInFormBloc extends Bloc<SignInFormEvent, SignInFormState> {
           forgotPasswordRequestSent: false,
         );
       },
+      registerWithPickomePressed: (e) async* {
+        yield* _performActionOnAuthFacadeWithPickome(
+          _authFacade.registerWithPickome,
+        );
+      },
+      signInWithPickomePressed: (e) async* {
+        yield* _performActionOnAuthFacadeWithPickome(
+          _authFacade.signInWithPickome,
+        );
+      },
+    );
+  }
+
+  Stream<SignInFormState> _performActionOnAuthFacadeWithPickome(
+      Future<Either<AuthFailure, Unit>> Function({
+    @required Username username,
+    @required EmailAddress emailAddress,
+    @required PhoneNumber phoneNumber,
+    @required Password password,
+  })
+          forwardedCall) async* {
+    Either<AuthFailure, Unit> failureOrSuccess;
+
+    /// 1. Check if the entered EmailAddress and Password are valid.
+    final isUsernameValid = state.username.isValid();
+    final isEmailValid = state.emailAddress.isValid();
+    final isPhoneNumberValid = state.phoneNumber.isValid();
+    final isPasswordValid = state.password.isValid();
+
+    /// 2. If valid, use IAuthFacade and yield Some<Right<Unit>> in the authFailureOrSuccessOption state field.
+    if ((isUsernameValid || isEmailValid || isPhoneNumberValid) &&
+        isPasswordValid) {
+      yield state.copyWith(
+        isSubmitting: true,
+        authFailureOrSuccessOption: none(),
+      );
+
+      failureOrSuccess = await forwardedCall(
+        username: state.username,
+        emailAddress: state.emailAddress,
+        phoneNumber: state.phoneNumber,
+        password: state.password,
+      );
+    }
+
+    /// 3. If invalid, indicate to start showing error messages and keep the authFailureOrSuccessOption set to None.
+    yield state.copyWith(
+      isSubmitting: false,
+      showErrorMessages: true,
+      // optionOf is equivalent to:
+      // failureOrSuccess == null ? none() : some(failureOrSuccess)
+      authFailureOrSuccessOption: optionOf(failureOrSuccess),
     );
   }
 
