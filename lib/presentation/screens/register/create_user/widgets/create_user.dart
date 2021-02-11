@@ -1,6 +1,8 @@
+import 'package:auto_route/auto_route.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:pickome/application/auth/sign_in_form/sign_in_form_bloc.dart';
+import 'package:pickome/presentation/routes/router.gr.dart';
 import 'package:pickome/presentation/widgets/basicWidgets/text_field/input_field.dart';
 import 'package:pickome/presentation/widgets/basicWidgets/button/button.dart';
 
@@ -24,42 +26,48 @@ class CreateUser extends StatelessWidget {
       child: Form(
         // autovalidate: state.showErrorMessages,
         autovalidateMode: AutovalidateMode.onUserInteraction,
-        child: ListView(
-          children: [
-            // crossAxisAlignment: CrossAxisAlignment.start,
-            // children: [
-            BlocBuilder<SignInFormBloc, SignInFormState>(
-              builder: (context, state) {
-                return InputField(
-                  // inputType: TextInputType.text,
-                  hintText: hintText,
-                  onChanged: (value) => {
-                    context.read<SignInFormBloc>().add(
-                          SignInFormEvent.emailChanged(value),
-                        ),
-                  },
-                  validator: (_) => context
-                      .read<SignInFormBloc>()
-                      .state
-                      .emailAddress
-                      .value
-                      .fold(
-                          (f) => f.maybeMap(
-                                invalidEmail: (_) => "Invalid Email",
-                                orElse: () => null,
-                              ),
-                          (_) => null),
-                  // prefixIcon: Icon(Icons.mail_outline_rounded),
-                );
-              },
-            ),
-            const SizedBox(height: 15.0),
-            Button(
-              onPressed: () => onPressed(),
-              text: 'Next',
-            ),
-          ],
-        ),
+        child: BlocBuilder<SignInFormBloc, SignInFormState>(
+            builder: (context, state) {
+          return ListView(
+            children: [
+              // crossAxisAlignment: CrossAxisAlignment.start,
+              // children: [
+              InputField(
+                // inputType: TextInputType.text,
+                hintText: hintText,
+                onChanged: (value) => {
+                  context.read<SignInFormBloc>().add(
+                        SignInFormEvent.emailChanged(value),
+                      ),
+                },
+                validator: (_) => context
+                    .read<SignInFormBloc>()
+                    .state
+                    .emailAddress
+                    .value
+                    .fold(
+                        (f) => f.maybeMap(
+                              invalidEmail: (_) => "Invalid Email",
+                              orElse: () => null,
+                            ),
+                        (_) => null),
+                // prefixIcon: Icon(Icons.mail_outline_rounded),
+              ),
+              const SizedBox(height: 15.0),
+              Button(
+                onPressed: () {
+                  ExtendedNavigator.of(context).push(
+                    Routes.createPasswordScreen,
+                    arguments: CreatePasswordScreenArguments(
+                      signInFormBloc: context.read<SignInFormBloc>(),
+                    ),
+                  );
+                },
+                text: 'Next',
+              ),
+            ],
+          );
+        }),
       ),
     );
   }

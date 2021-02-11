@@ -8,20 +8,4 @@ void main() {
   runApp(AppWidget());
 }
 
-// Global Provider --> available across all pages
-// class MyApp extends StatelessWidget {
-//   // AppRouter _appRouter = AppRouter();
-//
-//   @override
-//   Widget build(BuildContext context) {
-//     return BlockProvider<AuthenticationCubit>(
-//       create: (context) => AuthenticationCubit(),
-//       child: MaterialApp(
-//           initialRoute: initialRoute,
-//           routes: routes,
-//           // onGenerateRoute: _appRouter.onGenerateRoute,
-//           theme: appTheme()
-//       ),
-//     );
-//   }
-// }
+//flutter pub run build_runner watch --delete-conflicting-outputs

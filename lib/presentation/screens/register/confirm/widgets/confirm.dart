@@ -1,69 +1,63 @@
-// import 'package:flutter/material.dart';
-// import 'package:pickome/presentation/pages/Register/Confirm/component/TermsAndDataPolicy.dart';
-// import 'package:pickome/presentation/widgets/basicWidgets/Button/Button.dart';
-// import 'package:pickome/presentation/widgets/constants/DefaultStyleValues.dart';
-// import 'package:pickome/presentation/widgets/constants/ThemeColor.dart';
-//
-// class Confirm extends StatelessWidget {
-//
-//   Confirm({
-//     @required this.email,
-//     this.password
-//   });
-//
-//   final String email;
-//   final String password;
-//
-//   @override
-//   Widget build(BuildContext context) {
-//
-//     final signUpButton = getSignUpButton(context);
-//     final cancelButton = getCancelButton(context);
-//
-//     final textStyle = TextStyle(
-//       fontSize: DefaultStyleValues.defaultTitleSize,
-//       color: Colors.white70,
-//     );
-//
-//     return Padding(
-//       padding: const EdgeInsets.all(36.0),
-//       child: Column(
-//         mainAxisAlignment: MainAxisAlignment.center,
-//         children: [
-//           Spacer(),
-//           Text('Welcome to Pickome', style: textStyle),
-//           Text(email, style: textStyle),
-//           SizedBox(height: 25.0),
-//           signUpButton,
-//           SizedBox(height: 10.0),
-//           cancelButton,
-//           Spacer(),
-//           Divider(),
-//           TermsAndDataPolicy()
-//         ],
-//       ),
-//     );
-//   }
-//
-//   getSignUpButton(context) {
-//     return Button(
-//       onPressed: () {
-//         Navigator.of(context).pushNamedAndRemoveUntil('/home', (Route<dynamic> route) => false, arguments: {
-//           'email': email
-//         });
-//       },
-//       text: 'Complete Sign Up',
-//     );
-//   }
-//
-//   getCancelButton(context) {
-//     return Button(
-//       onPressed: () {
-//         Navigator.of(context).pushNamedAndRemoveUntil('/login', (Route<dynamic> route) => false);
-//       },
-//       text: 'Cancel',
-//       backgroundColor: Colors.transparent,
-//       fontColor: ThemeColor.BurnSienna,
-//     );
-//   }
-// }
+import 'package:auto_route/auto_route.dart';
+import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:pickome/application/auth/sign_in_form/sign_in_form_bloc.dart';
+import 'package:pickome/presentation/routes/router.gr.dart';
+import 'package:pickome/presentation/screens/register/confirm/widgets/terms_and_data_policy.dart';
+import 'package:pickome/presentation/widgets/basicWidgets/Button/Button.dart';
+import 'package:pickome/presentation/widgets/constants/DefaultStyleValues.dart';
+import 'package:pickome/presentation/widgets/constants/ThemeColor.dart';
+
+class Confirm extends StatelessWidget {
+  const Confirm();
+
+  @override
+  Widget build(BuildContext context) {
+    const textStyle = TextStyle(
+      fontSize: DefaultStyleValues.defaultTitleSize,
+      color: Colors.white70,
+    );
+
+    return Padding(
+      padding: const EdgeInsets.all(36.0),
+      child: BlocBuilder<SignInFormBloc, SignInFormState>(
+        builder: (context, state) {
+          return Column(
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: [
+              const Spacer(),
+              const Text('Welcome to Pickome', style: textStyle),
+              Text(
+                  context.read<SignInFormBloc>().state.emailAddress.value.fold(
+                      (f) => f.maybeMap(
+                            invalidEmail: (_) => "Invalid Email",
+                            orElse: () => null,
+                          ),
+                      (l) => l),
+                  style: textStyle),
+              const SizedBox(height: 25.0),
+              Button(
+                onPressed: () {
+                  // authenticate user
+                },
+                text: 'Complete Sign Up',
+              ),
+              const SizedBox(height: 10.0),
+              Button(
+                onPressed: () {
+                  ExtendedNavigator.of(context).replace(Routes.signInScreen);
+                },
+                text: 'Cancel',
+                backgroundColor: Colors.transparent,
+                fontColor: ThemeColor.BurnSienna,
+              ),
+              const Spacer(),
+              const Divider(),
+              TermsAndDataPolicy(),
+            ],
+          );
+        },
+      ),
+    );
+  }
+}
